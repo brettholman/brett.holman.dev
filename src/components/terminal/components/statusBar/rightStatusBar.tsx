@@ -55,7 +55,7 @@ export const RightStatusBar = () => {
     }
   }, [date]);
 
-  setTimeout(() => setDate(new Date()), 30000);
+  setTimeout(() => setDate(new Date()), 1000);
 
   return (
     <Box display="flex" justifyContent="flex-end">

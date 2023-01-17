@@ -3,19 +3,16 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   root: {
+    display: 'none',
     paddingLeft: "1em",
-    overflow: "auto",
+    borderColor: "transparent",
     backgroundColor: "transparent",
     resize: "none",
-    caretColor: "transparent",
-    height: "1em",
-    border: "none",
-    borderRight: "none",
-    borderLeft: "none",
-    color: "white",
-    flexGrow: 0,
-    flexShrink: 1,
-    flexBasis: "auto",
+    height: 0,
+    width: 0,
+
+    position: "fixed",
+    bottom: 0,
   },
   innerText: {
     // color: "#bcbcbc", // TODO use theme
@@ -23,16 +20,23 @@ const useStyles = makeStyles({
   },
 });
 
-export const PromptInput = () => {
+interface PromptInputProps {
+  updateValue: (input: string) => void
+}
+
+export const PromptInput = ({ updateValue }: PromptInputProps) => {
   const classes = useStyles();
   return (
     <TextField
+      onChange={(value) => updateValue(value.currentTarget.value)}
+      hidden
       autoFocus
       spellCheck="false"
       className={classes.root}
       unselectable="on"
       InputProps={{
         className: classes.innerText,
+        hidden: true
       }}
     />
   );
