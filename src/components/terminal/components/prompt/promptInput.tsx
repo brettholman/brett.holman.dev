@@ -1,43 +1,33 @@
-import { TextField } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
+import { Box } from "@mui/material";
+import Input from "@mui/material/Input";
+import { Controller, useFormContext } from "react-hook-form";
 
 const useStyles = makeStyles({
   root: {
-    display: 'none',
+    display: "none",
     paddingLeft: "1em",
     borderColor: "transparent",
     backgroundColor: "transparent",
     resize: "none",
-    height: 0,
-    width: 0,
-
+    height: "1px",
+    width: "1px",
     position: "fixed",
     bottom: 0,
   },
-  innerText: {
-    // color: "#bcbcbc", // TODO use theme
-    color: "white", // TODO use theme
-  },
 });
 
-interface PromptInputProps {
-  updateValue: (input: string) => void
-}
+interface PromptInputProps {}
 
-export const PromptInput = ({ updateValue }: PromptInputProps) => {
-  const classes = useStyles();
+export const PromptInput = () => {
+  const { control } = useFormContext();
   return (
-    <TextField
-      onChange={(value) => updateValue(value.currentTarget.value)}
-      hidden
-      autoFocus
-      spellCheck="false"
-      className={classes.root}
-      unselectable="on"
-      InputProps={{
-        className: classes.innerText,
-        hidden: true
-      }}
-    />
+    <Box style={{ height: "0px", width: "0px" }}>
+      <Controller
+        name="hiddenInput"
+        control={control}
+        render={({ field }) => <Input autoFocus {...field} />}
+      />
+    </Box>
   );
 };

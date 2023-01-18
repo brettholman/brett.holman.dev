@@ -1,13 +1,16 @@
 import { makeStyles } from "@material-ui/styles";
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
+import { FormProvider } from "react-hook-form";
+import { useTerminalForm } from "../../hooks/useTerminalForm";
 import { PromptDisplay } from "./promptDisplay";
 import { PromptInput } from "./promptInput";
 
 type PromptProps = {
   currentDirectory: string;
-  previousCommandSuccessful?: boolean;
-  focused?: boolean;
+  handleProcessCommand: (value: any) => void;
+  focused: boolean;
+  previousCommandSuccessful: boolean;
 };
 
 const useStyles = makeStyles({
@@ -28,21 +31,21 @@ const useStyles = makeStyles({
 
 export const Propmt = ({
   currentDirectory,
+  handleProcessCommand,
+  previousCommandSuccessful,
   focused,
-  previousCommandSuccessful = true,
 }: PromptProps) => {
   const classes = useStyles();
 
-  const [value, updateValue] = useState("");
+  const onSubmit = (args: SyntheticEvent) => {
+    args.preventDefault();
+    console.log({ args });
+    handleProcessCommand(args);
+  };
 
   return (
     <>
-      <PromptInput
-        updateValue={(value) => {
-          console.log({ value });
-          updateValue(value);
-        }}
-      />
+      <PromptInput />
       <Box className={classes.container}>
         <Typography
           color="secondary"
@@ -57,7 +60,7 @@ export const Propmt = ({
         >
           $
         </Typography>
-        <PromptDisplay value={value} focused={true} />
+        <PromptDisplay focused={focused} />
       </Box>
     </>
   );

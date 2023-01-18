@@ -1,0 +1,7 @@
+I am a highly experienced software engineer with 6 years of experience in the industry. My expertise lies in full stack development, specifically using technologies such as Node.js, TypeScript, Scala, Java, C# and React. I have a deep understanding of AWS cloud architecture and serverless technologies, allowing me to design and deploy scalable, highly available systems.
+
+I have a proven track record of delivering high-quality software and have experience architecting systems that are efficient, maintainable, and scalable. My expertise in both SQL and NoSQL databases enables me to create robust, data-driven applications that can handle large amounts of data.
+
+I am a quick learner, and I am always seeking new challenges to improve my skills. I am a proactive and self-motivated individual who is able to work well under pressure and to tight deadlines. I am a great team player and I am able to work well with others.
+
+I am excited to continue my career in software engineering and I am open to explore new opportunities to challenge myself and bring value to an organization. I am confident that with my skills and experience, I can make a valuable contribution to any team.

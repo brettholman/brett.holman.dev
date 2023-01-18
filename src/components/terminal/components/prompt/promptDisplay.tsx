@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/styles";
 import { Box } from "@mui/material";
+import { useFormContext } from "react-hook-form";
 
 interface PromptDisplayProps {
-  value: string;
-  focused?: boolean;
+  focused: boolean;
 }
 
 const useStyles = makeStyles({
@@ -14,17 +14,19 @@ const useStyles = makeStyles({
     justifyContent: "space-evenly",
   },
   caret: {
-    top: "50%",
-    paddingLeft: '.05em'
-  }
+    paddingTop: ".2em",
+    paddingLeft: ".05em",
+  },
 });
 
-export const PromptDisplay = ({ value, focused }: PromptDisplayProps) => {
+export const PromptDisplay = ({ focused }: PromptDisplayProps) => {
   const classes = useStyles();
+
+  const { watch } = useFormContext();
   return (
     <Box component="span" className={classes.container}>
       <Box component="span" color="#bcbcbc">
-        {value}
+        {watch("hiddenInput")}
       </Box>
       <Box component="span" className={classes.caret}>
         <svg>
@@ -34,7 +36,7 @@ export const PromptDisplay = ({ value, focused }: PromptDisplayProps) => {
             style={{
               fill: focused ? "rgb(187,187,187)" : "transparent",
               stroke: "rgb(187,187,187)",
-              strokeWidth: 3
+              strokeWidth: 3,
             }}
           />
         </svg>
