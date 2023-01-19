@@ -9,15 +9,14 @@ pipeline {
         stage('Build') {
             steps {
                 scripts {
-                    yarn install
-                    yarn build
+                    ./build.sh
                 }
             }
         }
         stage('Deploy') {
             steps {
                 scripts {
-                    echo 'it worked!'
+                    ./deploy.sh
                 }
             }
         }
