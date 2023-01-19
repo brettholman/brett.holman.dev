@@ -8,9 +8,10 @@ import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { useTerminalForm } from "../hooks/useTerminalForm";
 
-interface screenProps {
+interface ScreenProps {
   currentDirectory: string;
   focused: boolean;
+  commandMode: boolean;
 }
 
 const useStyles = makeStyles({
@@ -22,24 +23,30 @@ const useStyles = makeStyles({
   },
 });
 
-export const Screen = ({ currentDirectory, focused }: screenProps) => {
+export const Screen = ({
+  currentDirectory,
+  focused,
+  commandMode,
+}: ScreenProps) => {
   const classes = useStyles();
 
   const [previousCommandSuccessful, setPreviousCommandSuccessful] =
     useState(true);
 
   const { methods } = useTerminalForm();
-  const { processCommand, history } = useCommandProcessing();
+  const { processCommand, history } = useCommandProcessing(methods);
 
-  const handleProcessCommand = (value: any) => {
-    const result = processCommand(value);
-    setPreviousCommandSuccessful(result);
-  };
+  console.log({ history });
 
   const handleOnClick = (e: any) => {
     e.preventDefault();
     console.log("yo");
     methods.setFocus("hiddenInput");
+  };
+
+  const handleOnSubmit = (event: any) => {
+    event.preventDefault();
+    processCommand(currentDirectory, false);
   };
 
   return (
@@ -48,12 +55,12 @@ export const Screen = ({ currentDirectory, focused }: screenProps) => {
       <Box className={classes.root} onClick={handleOnClick}>
         <PromptHistory history={history} />
         <FormProvider {...methods}>
-          <form>
+          <form onSubmit={handleOnSubmit}>
             <Propmt
               currentDirectory={currentDirectory}
               focused={focused}
-              handleProcessCommand={handleProcessCommand}
               previousCommandSuccessful={previousCommandSuccessful}
+              commandMode={commandMode}
             />
           </form>
         </FormProvider>

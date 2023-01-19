@@ -4,14 +4,16 @@ import { useFormContext } from "react-hook-form";
 
 interface PromptDisplayProps {
   focused: boolean;
+  historicValue?: string;
 }
 
 const useStyles = makeStyles({
   container: {
+    height: "1em",
     paddingLeft: ".5em",
     display: "flex",
     position: "relative",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
   caret: {
     paddingTop: ".2em",
@@ -19,28 +21,35 @@ const useStyles = makeStyles({
   },
 });
 
-export const PromptDisplay = ({ focused }: PromptDisplayProps) => {
+export const PromptDisplay = ({
+  focused,
+  historicValue,
+}: PromptDisplayProps) => {
   const classes = useStyles();
 
-  const { watch } = useFormContext();
+  const formMethods = useFormContext();
+  const value = historicValue || formMethods?.watch("hiddenInput");
   return (
     <Box component="span" className={classes.container}>
-      <Box component="span" color="#bcbcbc">
-        {watch("hiddenInput")}
+      <Box>
+        {/* Pre will honor spaces at the end of input, span will not */}
+        <span style={{ color: "#bcbcbc" }}>{value}</span>
       </Box>
-      <Box component="span" className={classes.caret}>
-        <svg>
-          <rect
-            width=".5em"
-            height="1em"
-            style={{
-              fill: focused ? "rgb(187,187,187)" : "transparent",
-              stroke: "rgb(187,187,187)",
-              strokeWidth: 3,
-            }}
-          />
-        </svg>
-      </Box>
+      {!historicValue && (
+        <Box component="span" className={classes.caret}>
+          <svg>
+            <rect
+              width=".5em"
+              height="1em"
+              style={{
+                fill: focused ? "rgb(187,187,187)" : "transparent",
+                stroke: "rgb(187,187,187)",
+                strokeWidth: 3,
+              }}
+            />
+          </svg>
+        </Box>
+      )}
     </Box>
   );
 };

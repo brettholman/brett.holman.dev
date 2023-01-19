@@ -1,11 +1,29 @@
+import { useState } from "react";
+import { UseFormReturn } from "react-hook-form";
 import { PromptStorage } from "../models";
+import { TerminalForm } from "./useTerminalForm";
 
-export const useCommandProcessing = () => {
-  const history: PromptStorage[] = [];
+export const useCommandProcessing = ({
+  getValues,
+  setValue,
+}: UseFormReturn<TerminalForm>) => {
+  const [history, setHistory] = useState<Array<PromptStorage>>([]);
 
-  // TODO do not use any
-  const processCommand = (value: any): boolean => {
-    console.log({ value });
+  const processCommand = (
+    currentDirectory: string,
+    previousCommandSuccessful: boolean
+  ): boolean => {
+    const rawInput = getValues().hiddenInput;
+    const newHistory: PromptStorage = {
+      input: rawInput,
+      statusCode: 0,
+      output: "command not found",
+      currentDirectory,
+      previousCommandSuccessful,
+    };
+    setHistory([...history, newHistory]);
+
+    setValue("hiddenInput", "");
     return true;
   };
 
