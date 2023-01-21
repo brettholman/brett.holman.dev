@@ -9,14 +9,14 @@ pipeline {
         stage('Build') {
             steps {
                 scripts {
-                    ./build.sh
+                    echo 'build'
                 }
             }
         }
         stage('Deploy') {
             steps {
                 scripts {
-                    ./deploy.sh
+                    echo 'deploy'
                 }
             }
         }
