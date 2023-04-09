@@ -17,7 +17,7 @@ export const useCommandProcessing = ({
     const newHistory: PromptStorage = {
       input: rawInput,
       statusCode: 0,
-      output: "command not found",
+      output: `command not found: ${rawInput}`,
       currentDirectory,
       previousCommandSuccessful,
     };

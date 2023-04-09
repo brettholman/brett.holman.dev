@@ -21,7 +21,7 @@ export const Footer = () => {
       <Grid item lg={4} sm={0}>
         <LeftStatusBar
           sessionName="portfolio"
-          tabPosition={0}
+          tabPosition={1}
           panePosition={0}
         />
       </Grid>
