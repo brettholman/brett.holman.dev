@@ -14,12 +14,14 @@ export const useCommandProcessing = ({
     previousCommandSuccessful: boolean
   ): boolean => {
     const rawInput = getValues().hiddenInput;
+    console.log("process command", { rawInput });
     const newHistory: PromptStorage = {
       input: rawInput,
       statusCode: 0,
-      output: `command not found: ${rawInput}`,
+      output: `command not found: ${rawInput?.split(" ")?.[0] || ""}`,
       currentDirectory,
       previousCommandSuccessful,
+      timestamp: new Date(),
     };
     setHistory([...history, newHistory]);
 

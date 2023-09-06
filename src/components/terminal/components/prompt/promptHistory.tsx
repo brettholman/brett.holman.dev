@@ -12,6 +12,7 @@ export const PromptHistory = ({ history }: PromptHistoryProps): JSX.Element => (
     {history.map((value: PromptStorage, index: number) => (
       <>
         <Propmt
+          key={index}
           commandMode={false}
           focused={false}
           currentDirectory={value.currentDirectory}

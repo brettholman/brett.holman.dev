@@ -4,4 +4,5 @@ export interface PromptStorage {
   output: string;
   currentDirectory: string;
   previousCommandSuccessful: boolean;
+  timestamp: Date;
 }

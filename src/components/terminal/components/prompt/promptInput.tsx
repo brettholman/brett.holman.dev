@@ -7,14 +7,16 @@ interface PromptInputProps {
 }
 
 export const PromptInput = ({ commandMode }: PromptInputProps) => {
-  const { control } = useFormContext();
+  const { control, watch } = useFormContext();
+
+  const currentValue = watch("hiddenInput");
   return (
     <Box style={{ height: "0px", width: "0px" }}>
       <Controller
         name="hiddenInput"
         control={control}
         render={({ field }) => (
-          <Input disabled={commandMode} autoFocus {...field} />
+          <Input autoFocus {...field} value={currentValue} />
         )}
       />
     </Box>

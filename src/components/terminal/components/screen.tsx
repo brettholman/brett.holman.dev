@@ -7,11 +7,13 @@ import { useCommandProcessing } from "../hooks/useCommandProcessing";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { useTerminalForm } from "../hooks/useTerminalForm";
+import { SessionState } from "../models";
 
 interface ScreenProps {
   currentDirectory: string;
   focused: boolean;
   commandMode: boolean;
+  sessionState: SessionState;
 }
 
 const useStyles = makeStyles({
@@ -27,6 +29,7 @@ export const Screen = ({
   currentDirectory,
   focused,
   commandMode,
+  sessionState,
 }: ScreenProps) => {
   const classes = useStyles();
 
@@ -36,8 +39,6 @@ export const Screen = ({
   const { methods } = useTerminalForm();
   const { processCommand, history } = useCommandProcessing(methods);
 
-  console.log({ history });
-
   const handleOnClick = (e: any) => {
     e.preventDefault();
     console.log("yo");
@@ -46,7 +47,8 @@ export const Screen = ({
 
   const handleOnSubmit = (event: any) => {
     event.preventDefault();
-    processCommand(currentDirectory, false);
+    const previousCommand = processCommand(currentDirectory, false);
+    setPreviousCommandSuccessful(previousCommand);
   };
 
   return (
@@ -65,7 +67,7 @@ export const Screen = ({
           </form>
         </FormProvider>
         <ResponseBuffer />
-        <Footer />
+        <Footer activeTabIndex={sessionState.activeTabIndex} />
       </Box>
     </>
   );

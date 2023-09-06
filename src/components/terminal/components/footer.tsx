@@ -13,7 +13,11 @@ const useStyles = makeStyles({
   },
 });
 
-export const Footer = () => {
+interface FooterProps {
+  activeTabIndex: number;
+}
+
+export const Footer = ({ activeTabIndex }: FooterProps) => {
   const classes = useStyles();
 
   return (
@@ -27,7 +31,10 @@ export const Footer = () => {
       </Grid>
       <Grid item lg={4} sm={12}>
         <Grid container justifyContent="center">
-          <CenterStatusBar activeTabIndex={0} tabs={["sh", "sh"]} />
+          <CenterStatusBar
+            activeTabIndex={activeTabIndex}
+            tabs={["sh", "sh"]}
+          />
         </Grid>
       </Grid>
       <Grid item lg={4} sm={0}>

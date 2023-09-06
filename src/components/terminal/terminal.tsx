@@ -6,14 +6,15 @@ import { useTmuxControls } from "./hooks/useTmuxControls";
 export const Terminal = (): JSX.Element => {
   const [currentDir] = useState("/");
 
-  const { handleKeyPress, commandMode } = useTmuxControls();
+  const { handleKeyPress, commandMode, sessionState } = useTmuxControls();
 
   return (
     <Grid onKeyDown={handleKeyPress}>
       <Screen
         currentDirectory={currentDir}
-        focused={true}
+        focused={!commandMode}
         commandMode={commandMode}
+        sessionState={sessionState}
       />
     </Grid>
   );

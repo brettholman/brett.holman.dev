@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { SessionState } from "../models";
 
 export const useTmuxControls = () => {
   const [commandMode, setCommandMode] = useState(false);
+  const [sessionState, setSessionState] = useState({} as SessionState);
+
+  console.log({ commandMode });
 
   const handleKeyPress = (event: any) => {
+    console.log({ commandMode, value: event.key, ctrl: event.ctrlKey });
+    const newSessionState = sessionState;
     if (commandMode) {
       switch (event.key) {
         case "n":
@@ -25,14 +31,14 @@ export const useTmuxControls = () => {
           console.log("catch all");
       }
       setCommandMode(false);
-    }
-    if (event.ctrlKey && event.key === "a") {
-      setCommandMode(true);
-    }
-    if (event.ctrlKey && event.key === "l") {
-      setCommandMode(false);
+      setSessionState(newSessionState);
+    } else {
+      if (event.ctrlKey && event.key === "a") {
+        console.log("settingCommandMode");
+        setCommandMode(true);
+      }
     }
   };
 
-  return { handleKeyPress, commandMode };
+  return { handleKeyPress, commandMode, sessionState };
 };
