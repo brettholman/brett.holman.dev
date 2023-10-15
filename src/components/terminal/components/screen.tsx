@@ -45,9 +45,9 @@ export const Screen = ({
     methods.setFocus("hiddenInput");
   };
 
-  const handleOnSubmit = (event: any) => {
+  const handleOnSubmit = async (event: any) => {
     event.preventDefault();
-    const previousCommand = processCommand(currentDirectory, false);
+    const previousCommand = await processCommand(currentDirectory);
     setPreviousCommandSuccessful(previousCommand);
   };
 

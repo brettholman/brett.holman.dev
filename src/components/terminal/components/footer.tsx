@@ -31,10 +31,7 @@ export const Footer = ({ activeTabIndex }: FooterProps) => {
       </Grid>
       <Grid item lg={4} sm={12}>
         <Grid container justifyContent="center">
-          <CenterStatusBar
-            activeTabIndex={activeTabIndex}
-            tabs={["sh", "sh"]}
-          />
+          <CenterStatusBar activeTabIndex={activeTabIndex} tabs={["sh"]} />
         </Grid>
       </Grid>
       <Grid item lg={4} sm={0}>

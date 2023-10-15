@@ -1,6 +1,8 @@
+import { CommandStatusCode } from "./commandStatusCode";
+
 export interface PromptStorage {
   input: string;
-  statusCode: 0 | 1;
+  statusCode: CommandStatusCode;
   output: string;
   currentDirectory: string;
   previousCommandSuccessful: boolean;

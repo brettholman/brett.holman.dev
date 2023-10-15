@@ -3,13 +3,13 @@ import { Box, Typography } from "@mui/material";
 
 const useStyles = makeStyles({
   activeItem: {
-    paddingLeft: '1em',
-    paddingRight: '1em',
+    paddingLeft: "1em",
+    paddingRight: "1em",
     backgroundColor: "#b7d543",
   },
   inActiveItem: {
-    paddingLeft: '1em',
-    paddingRight: '1em',
+    paddingLeft: "1em",
+    paddingRight: "1em",
     color: "#b7d543",
   },
 });
@@ -31,7 +31,8 @@ export const CenterStatusBar = ({
       {tabs.map((name, index) => {
         const isActiveTab = index === activeTabIndex;
         // TODO this is terrible
-        const displayText = index === lastTabIndex ? `${index}:${name}-` : `${index}:${name}`;
+        const displayText =
+          index === lastTabIndex ? `${index}:${name}-` : `${index}:${name}`;
         return (
           <Typography
             key={`${name}-${index}`}
