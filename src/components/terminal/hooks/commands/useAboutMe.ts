@@ -1,13 +1,15 @@
 import { CommandResponse } from "../../models/commandResponse";
 import { CommandStatusCode } from "../../models/commandStatusCode";
 
-export const useKexp = () => {
-  const kexp = async (args?: string[]): Promise<CommandResponse> => {
+const about = "aboutMe";
+
+export const useAboutMe = () => {
+  const aboutMe = (): CommandResponse => {
     return {
+      output: about,
       statusCode: CommandStatusCode.SUCCESS,
-      output: "we're processing actions...",
-    };
+    } as CommandResponse;
   };
 
-  return { kexp };
+  return { aboutMe };
 };

@@ -14,6 +14,7 @@ interface ScreenProps {
   focused: boolean;
   commandMode: boolean;
   sessionState: SessionState;
+  updateSessionState: (_: Partial<SessionState>) => void;
 }
 
 const useStyles = makeStyles({
@@ -30,6 +31,7 @@ export const Screen = ({
   focused,
   commandMode,
   sessionState,
+  updateSessionState,
 }: ScreenProps) => {
   const classes = useStyles();
 
@@ -37,7 +39,11 @@ export const Screen = ({
     useState(true);
 
   const { methods } = useTerminalForm();
-  const { processCommand, history } = useCommandProcessing(methods);
+  const { processCommand, history } = useCommandProcessing({
+    ...methods,
+    sessionState,
+    updateSessionState,
+  });
 
   const handleOnClick = (e: any) => {
     e.preventDefault();
@@ -67,7 +73,10 @@ export const Screen = ({
           </form>
         </FormProvider>
         <ResponseBuffer />
-        <Footer activeTabIndex={sessionState.activeTabIndex} />
+        <Footer
+          sessionState={sessionState}
+          updateSessionState={updateSessionState}
+        />
       </Box>
     </>
   );

@@ -23,6 +23,12 @@ export const useCommandHandler = ({
       case SupportedCommands.PWD:
         response = commands.pwd(currentDirectory || "");
         break;
+      case SupportedCommands.HELP:
+        response = commands.help();
+        break;
+      case SupportedCommands.ABOUT:
+        response = commands.aboutMe();
+        break;
       case SupportedCommands.KEXP:
         response = await commands.kexp(args);
         break;

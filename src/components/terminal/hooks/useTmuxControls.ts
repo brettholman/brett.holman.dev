@@ -1,19 +1,27 @@
 import { useState } from "react";
 import { SessionState } from "../models";
 
-export const useTmuxControls = () => {
+export const useTmuxControls = (
+  sessionState: SessionState,
+  updateSessionState: (sessionState: Partial<SessionState>) => void
+) => {
   const [commandMode, setCommandMode] = useState(false);
-  const [sessionState, setSessionState] = useState({} as SessionState);
 
   const handleKeyPress = (event: any) => {
     const newSessionState = sessionState;
     if (commandMode) {
       switch (event.key) {
         case "n":
+          newSessionState.activeTabIndex =
+            newSessionState.activeTabIndex + 1 >= newSessionState.tabs.length
+              ? 0
+              : newSessionState.activeTabIndex + 1;
           break;
         case "c":
+          newSessionState.tabs.push({ name: "sh", history: [] });
           break;
         case ",":
+          // TODO rename tab mode
           break;
         case "|":
           break;
@@ -23,7 +31,7 @@ export const useTmuxControls = () => {
           console.log("catch all");
       }
       setCommandMode(false);
-      setSessionState(newSessionState);
+      updateSessionState(newSessionState);
     } else {
       if (event.ctrlKey && event.key === "a") {
         setCommandMode(true);

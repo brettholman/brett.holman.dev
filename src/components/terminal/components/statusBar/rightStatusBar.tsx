@@ -39,7 +39,7 @@ const formatTime = (date: Date): string =>
     date.getMinutes().toString()
   )}`;
 
-export const RightStatusBar = () => {
+export const RightStatusBar = ({ isMobile }: { isMobile: boolean }) => {
   const classes = useStyles();
 
   const [date, setDate] = useState(new Date());
@@ -54,6 +54,10 @@ export const RightStatusBar = () => {
       setDayOfWeek(dayOfWeekLookup[date.getDay()]);
     }
   }, [date]);
+
+  if (isMobile) {
+    return <></>;
+  }
 
   setTimeout(() => setDate(new Date()), 1000);
 

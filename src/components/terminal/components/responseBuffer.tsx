@@ -3,5 +3,5 @@ interface ResponseBufferProps {
 }
 
 export const ResponseBuffer = ({ value }: ResponseBufferProps) => (
-  <pre>{value}</pre>
+  <pre style={{ paddingLeft: "1em", whiteSpace: "pre-wrap" }}>{value}</pre>
 );

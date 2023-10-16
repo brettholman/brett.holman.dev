@@ -28,12 +28,14 @@ interface LeftStatusBarProps {
   sessionName: string;
   tabPosition: number;
   panePosition: number;
+  isMobile: boolean;
 }
 
 export const LeftStatusBar = ({
   sessionName,
   tabPosition,
   panePosition,
+  isMobile,
 }: LeftStatusBarProps) => {
   const classes = useStyles();
 
@@ -46,6 +48,10 @@ export const LeftStatusBar = ({
   useMemo(() => {
     getData();
   }, []);
+
+  if (isMobile) {
+    return <></>;
+  }
 
   return (
     <Box>

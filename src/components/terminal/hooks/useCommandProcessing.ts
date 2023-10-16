@@ -1,23 +1,31 @@
-import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { PromptStorage } from "../models";
+import { PromptStorage, SessionState } from "../models";
 import { TerminalForm } from "./useTerminalForm";
 import { useCommandHandler } from "./useCommandHandler";
 import { CommandStatusCode } from "../models/commandStatusCode";
+import { useConvertToHistory } from "./useConvertToHistory";
+
+interface Props {
+  sessionState: SessionState;
+  updateSessionState: (_: Partial<SessionState>) => void;
+}
 
 export const useCommandProcessing = ({
   setValue,
   watch,
-}: UseFormReturn<TerminalForm>) => {
-  const [history, setCommandHistory] = useState<Array<PromptStorage>>([]);
-
+  sessionState,
+  updateSessionState,
+}: UseFormReturn<TerminalForm> & Props) => {
   const clearCommandHistory = () => {
-    setCommandHistory([]);
+    sessionState.tabs[sessionState.activeTabIndex].history = [];
+    updateSessionState(sessionState);
   };
 
   const { handleCommand } = useCommandHandler({
     setCommandHistory: clearCommandHistory,
   });
+
+  const { convertToHistory } = useConvertToHistory();
 
   const processCommand = async (currentDirectory: string): Promise<boolean> => {
     const rawInput = watch("hiddenInput");
@@ -36,16 +44,13 @@ export const useCommandProcessing = ({
     const response = await handleCommand(command, args);
 
     if (response) {
-      const newHistory: PromptStorage = {
-        input: rawInput,
-        currentDirectory,
-        previousCommandSuccessful:
-          response.statusCode === CommandStatusCode.SUCCESS,
-        timestamp: new Date(),
-        ...response,
-      };
+      const newHistory: PromptStorage = convertToHistory(
+        response,
+        rawInput,
+        currentDirectory
+      );
 
-      setCommandHistory([...history, newHistory]);
+      sessionState.tabs[sessionState.activeTabIndex].history.push(newHistory);
     }
 
     setValue("hiddenInput", "");
@@ -54,5 +59,8 @@ export const useCommandProcessing = ({
     );
   };
 
-  return { processCommand, history };
+  return {
+    processCommand,
+    history: sessionState.tabs[sessionState.activeTabIndex].history,
+  };
 };
