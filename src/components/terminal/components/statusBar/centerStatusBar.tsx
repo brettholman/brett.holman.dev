@@ -1,18 +1,18 @@
-import { makeStyles } from "@material-ui/styles";
-import { Box, Typography } from "@mui/material";
-import { SessionState } from "../../models";
+import { makeStyles } from '@material-ui/styles';
+import { Box, Typography } from '@mui/material';
+import { SessionState } from '../../models';
 
 const useStyles = makeStyles({
   activeItem: {
-    paddingLeft: "1em",
-    paddingRight: "1em",
-    backgroundColor: "#b7d543",
-    textColor: "!important #000000",
+    paddingLeft: '1em',
+    paddingRight: '1em',
+    backgroundColor: '#b7d543',
+    textColor: '!important #000000',
   },
   inActiveItem: {
-    paddingLeft: "1em",
-    paddingRight: "1em",
-    color: "#b7d543",
+    paddingLeft: '1em',
+    paddingRight: '1em',
+    color: '#b7d543',
   },
 });
 
@@ -31,14 +31,16 @@ export const CenterStatusBar = ({
       {sessionState.tabs.map((tab, index) => {
         const isActiveTab = index === sessionState.activeTabIndex;
         return (
-          <span onClick={() => updateSessionState({ activeTabIndex: index })}>
+          <span
+            key={`${tab.name}-${index}`}
+            onClick={() => updateSessionState({ activeTabIndex: index })}
+          >
             <Typography
-              key={`${tab.name}-${index}`}
-              variant="body2"
+              variant='body2'
               className={
                 isActiveTab ? classes.activeItem : classes.inActiveItem
               }
-              component="span"
+              component='span'
             >
               {tab.name}
             </Typography>

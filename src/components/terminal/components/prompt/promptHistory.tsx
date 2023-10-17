@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
-import { PromptStorage } from "../../models";
-import { ResponseBuffer } from "../responseBuffer";
-import { Propmt } from "./prompt";
-import { CommandStatusCode } from "../../models/commandStatusCode";
+import { Box } from '@mui/material';
+import { PromptStorage } from '../../models';
+import { ResponseBuffer } from '../responseBuffer';
+import { Propmt } from './prompt';
+import { CommandStatusCode } from '../../models/commandStatusCode';
 
 interface PromptHistoryProps {
   history: Array<PromptStorage>;
@@ -11,9 +11,8 @@ interface PromptHistoryProps {
 export const PromptHistory = ({ history }: PromptHistoryProps): JSX.Element => (
   <Box>
     {history.map((value: PromptStorage, index: number) => (
-      <>
+      <span key={index}>
         <Propmt
-          key={index}
           commandMode={false}
           focused={false}
           currentDirectory={value.currentDirectory}
@@ -23,7 +22,7 @@ export const PromptHistory = ({ history }: PromptHistoryProps): JSX.Element => (
           historicValue={value.input}
         />
         <ResponseBuffer value={value.output} />
-      </>
+      </span>
     ))}
   </Box>
 );
