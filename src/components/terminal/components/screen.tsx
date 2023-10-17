@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { makeStyles } from '@material-ui/styles';
 import { Propmt, PromptHistory } from './prompt';
 import { ResponseBuffer } from './responseBuffer';

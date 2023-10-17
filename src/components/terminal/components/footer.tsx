@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@mui/material';
 import { CenterStatusBar, LeftStatusBar, RightStatusBar } from './statusBar';
 import { SessionState } from '../models/sessionState';
 
