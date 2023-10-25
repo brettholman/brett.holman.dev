@@ -1,3 +1,4 @@
+import React from "react";
 import { Box } from "@mui/material";
 import { PromptStorage } from "../../models";
 import { ResponseBuffer } from "../responseBuffer";
@@ -11,9 +12,8 @@ interface PromptHistoryProps {
 export const PromptHistory = ({ history }: PromptHistoryProps): JSX.Element => (
   <Box>
     {history.map((value: PromptStorage, index: number) => (
-      <>
+      <React.Fragment key={index}>
         <Propmt
-          key={index}
           commandMode={false}
           focused={false}
           currentDirectory={value.currentDirectory}
@@ -23,7 +23,7 @@ export const PromptHistory = ({ history }: PromptHistoryProps): JSX.Element => (
           historicValue={value.input}
         />
         <ResponseBuffer value={value.output} />
-      </>
+      </React.Fragment>
     ))}
   </Box>
 );

@@ -5,12 +5,11 @@ import { ResponseBuffer } from "./responseBuffer";
 import { Footer } from "./footer";
 import { useCommandProcessing } from "../hooks/useCommandProcessing";
 import { useState } from "react";
-import { FormProvider } from "react-hook-form";
-import { useTerminalForm } from "../hooks/useTerminalForm";
+import { FormProvider, useFormContext } from "react-hook-form";
 import { SessionState } from "../models";
+import { TerminalForm } from "../hooks/useTerminalForm";
 
 interface ScreenProps {
-  currentDirectory: string;
   focused: boolean;
   commandMode: boolean;
   sessionState: SessionState;
@@ -27,7 +26,6 @@ const useStyles = makeStyles({
 });
 
 export const Screen = ({
-  currentDirectory,
   focused,
   commandMode,
   sessionState,
@@ -38,34 +36,31 @@ export const Screen = ({
   const [previousCommandSuccessful, setPreviousCommandSuccessful] =
     useState(true);
 
-  const { methods } = useTerminalForm();
+  const methods = useFormContext<TerminalForm>();
+
   const { processCommand, history } = useCommandProcessing({
     ...methods,
     sessionState,
     updateSessionState,
   });
 
-  const handleOnClick = (e: any) => {
-    e.preventDefault();
-    console.log("yo");
-    methods.setFocus("hiddenInput");
-  };
-
   const handleOnSubmit = async (event: any) => {
     event.preventDefault();
-    const previousCommand = await processCommand(currentDirectory);
+    const previousCommand = await processCommand(
+      sessionState.getActiveTab().currentDirectory
+    );
     setPreviousCommandSuccessful(previousCommand);
   };
 
   return (
     <>
       <CssBaseline />
-      <Box className={classes.root} onClick={handleOnClick}>
+      <Box className={classes.root}>
         <PromptHistory history={history} />
         <FormProvider {...methods}>
           <form onSubmit={handleOnSubmit}>
             <Propmt
-              currentDirectory={currentDirectory}
+              currentDirectory={sessionState.getActiveTab().currentDirectory}
               focused={focused}
               previousCommandSuccessful={previousCommandSuccessful}
               commandMode={commandMode}

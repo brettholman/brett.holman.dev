@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { SessionState } from "../models";
+import { SessionState, Tab } from "../models";
+
+const defaultTab = (): Tab => ({
+  name: "sh",
+  history: [],
+  currentDirectory: "/",
+});
 
 export const useTmuxControls = (
   sessionState: SessionState,
@@ -18,15 +24,12 @@ export const useTmuxControls = (
               : newSessionState.activeTabIndex + 1;
           break;
         case "c":
-          newSessionState.tabs.push({ name: "sh", history: [] });
+          newSessionState.tabs.push(defaultTab());
           break;
         case ",":
           // TODO rename tab mode
           break;
-        case "|":
-          break;
-        case "-":
-          break;
+        // TODO handle pane splitting
         default:
           console.log("catch all");
       }

@@ -31,9 +31,11 @@ export const CenterStatusBar = ({
       {sessionState.tabs.map((tab, index) => {
         const isActiveTab = index === sessionState.activeTabIndex;
         return (
-          <span onClick={() => updateSessionState({ activeTabIndex: index })}>
+          <span
+            onClick={() => updateSessionState({ activeTabIndex: index })}
+            key={`${tab.name}-${index}`}
+          >
             <Typography
-              key={`${tab.name}-${index}`}
               variant="body2"
               className={
                 isActiveTab ? classes.activeItem : classes.inActiveItem
