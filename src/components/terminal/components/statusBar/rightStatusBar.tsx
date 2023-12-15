@@ -62,7 +62,7 @@ export const RightStatusBar = ({ isMobile }: { isMobile: boolean }) => {
   setTimeout(() => setDate(new Date()), 1000);
 
   return (
-    <Box display="flex" justifyContent="flex-end">
+    <Box>
       <Typography
         variant="body2"
         className={classes.dayOfWeek}
