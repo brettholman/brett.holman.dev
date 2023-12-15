@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 import { Screen } from "./components/screen";
 import { useTmuxControls } from "./hooks/useTmuxControls";
@@ -17,20 +17,22 @@ export const Terminal = (): JSX.Element => {
     setSessionState({ ...sessionState, ...newState });
   };
 
-  const { handleKeyPress, commandMode } = useTmuxControls(
+  const { handleKeyPress } = useTmuxControls(
     sessionState,
     updateSessionState,
     getDefaultTab,
   );
 
-  const { methods } = useTerminalForm({ commandMode });
+  const { methods } = useTerminalForm();
+  useEffect(() => {
+    console.log({ sessionState })
+  }, [sessionState.tabs])
 
   return (
     <FormProvider {...methods}>
       <Box onKeyDown={handleKeyPress}>
         <Screen
-          focused={!commandMode}
-          commandMode={commandMode}
+          focused={true} // todo delete me
           sessionState={sessionState}
           updateSessionState={updateSessionState}
         />

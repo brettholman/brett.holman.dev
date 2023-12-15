@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 import { Box, Typography } from "@mui/material";
+import { Tab } from "../../models";
 import { PromptDisplay } from "./promptDisplay";
 import { PromptInput } from "./promptInput";
 
@@ -7,7 +8,7 @@ type PromptProps = {
   currentDirectory: string;
   focused: boolean;
   previousCommandSuccessful: boolean;
-  commandMode: boolean;
+  tab?: Tab;
   historicValue?: string;
 };
 
@@ -31,14 +32,14 @@ export const Propmt = ({
   currentDirectory,
   previousCommandSuccessful,
   focused,
-  commandMode,
+  tab,
   historicValue,
 }: PromptProps) => {
   const classes = useStyles();
 
   return (
     <>
-      {!historicValue && <PromptInput commandMode={commandMode} />}
+      {!historicValue && <PromptInput tab={tab} />}
       <Box className={classes.container}>
         <Typography
           color="secondary"

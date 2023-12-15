@@ -24,5 +24,5 @@ export const useTmuxControls = (
     }
   };
 
-  return { handleKeyPress, commandMode, sessionState };
+  return { handleKeyPress, sessionState };
 };

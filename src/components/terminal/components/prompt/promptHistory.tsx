@@ -14,7 +14,6 @@ export const PromptHistory = ({ history }: PromptHistoryProps): JSX.Element => (
     {history.map((value: PromptStorage, index: number) => (
       <React.Fragment key={index}>
         <Propmt
-          commandMode={false}
           focused={false}
           currentDirectory={value.currentDirectory}
           previousCommandSuccessful={

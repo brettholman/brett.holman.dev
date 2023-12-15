@@ -4,7 +4,7 @@ export interface TerminalForm {
   hiddenInput: string;
 }
 
-export const useTerminalForm = ({ commandMode }: { commandMode: boolean }) => {
+export const useTerminalForm = () => {
   const methods = useForm<TerminalForm>({
     defaultValues: { hiddenInput: "" },
     mode: "onSubmit",

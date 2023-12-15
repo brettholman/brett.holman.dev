@@ -6,7 +6,6 @@ import { useConvertToHistory } from "./useConvertToHistory";
 
 export const useGetDefaultSession = () => {
   const { aboutMe } = useAboutMe();
-  const { help } = useHelp();
   const { welcome } = useWelcome();
   const { convertToHistory } = useConvertToHistory();
 
@@ -16,11 +15,10 @@ export const useGetDefaultSession = () => {
 
   const defaultTabs: Array<Tab> = [
     {
-      name: "help",
+      name: "welcome",
       currentDirectory: "/",
       history: [
         convertToHistory(welcome(), "welcome"),
-        convertToHistory(help(), "help"),
       ],
       inputBuffer: ""
     },

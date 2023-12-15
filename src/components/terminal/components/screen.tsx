@@ -4,14 +4,13 @@ import { Propmt, PromptHistory } from "./prompt";
 import { ResponseBuffer } from "./responseBuffer";
 import { Footer } from "./footer";
 import { useCommandProcessing } from "../hooks/useCommandProcessing";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useFormContext } from "react-hook-form";
-import { SessionState } from "../models";
+import { SessionState, Tab } from "../models";
 import { TerminalForm } from "../hooks/useTerminalForm";
 
 interface ScreenProps {
   focused: boolean;
-  commandMode: boolean;
   sessionState: SessionState;
   updateSessionState: (_: Partial<SessionState>) => void;
 }
@@ -33,7 +32,6 @@ const useStyles = makeStyles({
 
 export const Screen = ({
   focused,
-  commandMode,
   sessionState,
   updateSessionState,
 }: ScreenProps) => {
@@ -41,6 +39,12 @@ export const Screen = ({
 
   const [previousCommandSuccessful, setPreviousCommandSuccessful] =
     useState(true);
+
+  const [activeTab, setActiveTab] = useState<Tab>(sessionState.getActiveTab());
+
+  useEffect(() => {
+    setActiveTab(sessionState.getActiveTab())
+  }, [sessionState.activeTabIndex])
 
   const methods = useFormContext<TerminalForm>();
 
@@ -60,6 +64,7 @@ export const Screen = ({
     bottomEl[0].scrollIntoView({ block: 'end' });
   };
 
+  // TODO move the form to the prompt component?
   return (
     <>
       <CssBaseline />
@@ -72,7 +77,7 @@ export const Screen = ({
                 currentDirectory={sessionState.getActiveTab().currentDirectory}
                 focused={focused}
                 previousCommandSuccessful={previousCommandSuccessful}
-                commandMode={commandMode}
+                tab={activeTab}
               />
             </form>
           </FormProvider>
