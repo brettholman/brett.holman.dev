@@ -31,7 +31,7 @@ export const Footer = ({ sessionState, updateSessionState }: FooterProps) => {
     <div className={classes.footer}>
       <LeftStatusBar
         sessionName="portfolio"
-        tabPosition={1}
+        tabPosition={sessionState.activeTabIndex}
         panePosition={0}
         isMobile={isMobile}
       />
