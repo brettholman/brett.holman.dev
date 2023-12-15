@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { Screen } from "./components/screen";
 import { useTmuxControls } from "./hooks/useTmuxControls";
@@ -24,9 +24,6 @@ export const Terminal = (): JSX.Element => {
   );
 
   const { methods } = useTerminalForm();
-  useEffect(() => {
-    console.log({ sessionState })
-  }, [sessionState.tabs])
 
   return (
     <FormProvider {...methods}>

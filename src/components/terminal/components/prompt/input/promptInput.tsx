@@ -2,10 +2,10 @@ import { Box } from "@mui/material";
 import Input from "@mui/material/Input";
 import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { Tab } from "../../models";
+import { Tab } from "../../../models";
 
 interface PromptInputProps {
-  tab?: Tab;
+  tab: Tab;
 }
 
 export const PromptInput = ({ tab }: PromptInputProps) => {
@@ -14,7 +14,6 @@ export const PromptInput = ({ tab }: PromptInputProps) => {
   const currentValue = watch("hiddenInput");
 
   useEffect(() => {
-    console.log({ currentValue, tab, input: tab?.inputBuffer })
     if (tab) {
       tab.inputBuffer = currentValue;
     }
