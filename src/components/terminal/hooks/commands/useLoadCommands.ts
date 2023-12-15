@@ -1,6 +1,5 @@
 import { useClearScreen } from "./useClearScreen";
 import { usePwd } from "./usePwd";
-import { useKexp } from "./useKexp";
 import { useHelp } from "./useHelp";
 import { useAboutMe } from "./useAboutMe";
 
@@ -13,7 +12,6 @@ export const useLoadCommands = ({
 }: UseLoadCommandsProps) => ({
   ...useClearScreen({ setCommandHistory }),
   ...usePwd(),
-  ...useKexp(),
   ...useHelp(),
   ...useAboutMe(),
 });

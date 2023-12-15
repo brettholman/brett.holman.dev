@@ -5,7 +5,6 @@ const output = `There are various commands that are supported. Providing the arg
 Currently the list of supported commands are as follows:
   - help (prints this message, no arguments accepted at this time)
   - about
-  - kexp
   - pwd
   - clear
 Give any of the commands a shot! You can start typing at any point (or navigate below to choose a different tab)`;

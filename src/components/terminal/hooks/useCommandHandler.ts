@@ -29,9 +29,6 @@ export const useCommandHandler = ({
       case SupportedCommands.ABOUT:
         response = commands.aboutMe();
         break;
-      case SupportedCommands.KEXP:
-        response = await commands.kexp(args);
-        break;
       case SupportedCommands.CLEAR_SCREEN:
         commands.clear();
         return null;
