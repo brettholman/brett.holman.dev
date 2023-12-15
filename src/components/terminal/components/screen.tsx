@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import { Propmt, PromptHistory } from "./prompt";
 import { ResponseBuffer } from "./responseBuffer";
@@ -21,8 +21,14 @@ const useStyles = makeStyles({
     backgroundColor: "#292929",
     minWidth: "100%",
     height: "100vh",
-    position: "fixed",
+    padding: 0
   },
+  scrollActive: {
+    overflowY: "scroll",
+    overflowX: "hidden",
+    width: "100vw",
+    height: "95vh"
+  }
 });
 
 export const Screen = ({
@@ -50,29 +56,33 @@ export const Screen = ({
       sessionState.getActiveTab().currentDirectory
     );
     setPreviousCommandSuccessful(previousCommand);
+    const bottomEl = document.getElementsByClassName('form-entry');
+    bottomEl[0].scrollIntoView({ block: 'end' });
   };
 
   return (
     <>
       <CssBaseline />
-      <Box className={classes.root}>
-        <PromptHistory history={history} />
-        <FormProvider {...methods}>
-          <form onSubmit={handleOnSubmit}>
-            <Propmt
-              currentDirectory={sessionState.getActiveTab().currentDirectory}
-              focused={focused}
-              previousCommandSuccessful={previousCommandSuccessful}
-              commandMode={commandMode}
-            />
-          </form>
-        </FormProvider>
-        <ResponseBuffer />
+      <div className={classes.root}>
+        <div className={classes.scrollActive}>
+          <PromptHistory history={history} />
+          <FormProvider {...methods}>
+            <form onSubmit={handleOnSubmit} className="form-entry">
+              <Propmt
+                currentDirectory={sessionState.getActiveTab().currentDirectory}
+                focused={focused}
+                previousCommandSuccessful={previousCommandSuccessful}
+                commandMode={commandMode}
+              />
+            </form>
+          </FormProvider>
+          <ResponseBuffer />
+        </div>
         <Footer
           sessionState={sessionState}
           updateSessionState={updateSessionState}
         />
-      </Box>
+      </div>
     </>
   );
 };
