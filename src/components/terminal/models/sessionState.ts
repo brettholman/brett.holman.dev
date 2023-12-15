@@ -4,6 +4,7 @@ export interface Tab {
   name: string;
   currentDirectory: string;
   history: Array<PromptStorage>;
+  inputBuffer: string;
 }
 
 interface ISessionState {

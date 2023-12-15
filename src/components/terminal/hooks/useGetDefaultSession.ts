@@ -4,11 +4,15 @@ import { useHelp } from "./commands/useHelp";
 import { useWelcome } from "./commands/useWelcome";
 import { useConvertToHistory } from "./useConvertToHistory";
 
-export const useGetDefaultSession = (): SessionState => {
+export const useGetDefaultSession = () => {
   const { aboutMe } = useAboutMe();
   const { help } = useHelp();
   const { welcome } = useWelcome();
   const { convertToHistory } = useConvertToHistory();
+
+  const getDefaultTab = (): Tab => ({
+    name: "sh", currentDirectory: "/", history: [], inputBuffer: ""
+  });
 
   const defaultTabs: Array<Tab> = [
     {
@@ -18,14 +22,18 @@ export const useGetDefaultSession = (): SessionState => {
         convertToHistory(welcome(), "welcome"),
         convertToHistory(help(), "help"),
       ],
+      inputBuffer: ""
     },
     {
       name: "about",
       currentDirectory: "/",
       history: [convertToHistory(aboutMe(), "about")],
+      inputBuffer: ""
     },
-    { name: "sh", currentDirectory: "/", history: [] },
+    getDefaultTab(),
   ];
 
-  return new SessionState(defaultTabs);
+  const defaultSessionState = new SessionState(defaultTabs);
+
+  return { defaultSessionState, getDefaultTab };
 };

@@ -8,19 +8,19 @@ import { useGetDefaultSession } from "./hooks/useGetDefaultSession";
 import { useTerminalForm } from "./hooks/useTerminalForm";
 
 export const Terminal = (): JSX.Element => {
-  const defaultSession = useGetDefaultSession();
+  const { defaultSessionState, getDefaultTab } = useGetDefaultSession();
 
   const [sessionState, setSessionState] =
-    useState<SessionState>(defaultSession);
+    useState<SessionState>(defaultSessionState);
 
   const updateSessionState = (newState: Partial<SessionState>) => {
-    console.log({ newState });
     setSessionState({ ...sessionState, ...newState });
   };
 
   const { handleKeyPress, commandMode } = useTmuxControls(
     sessionState,
-    updateSessionState
+    updateSessionState,
+    getDefaultTab,
   );
 
   const { methods } = useTerminalForm({ commandMode });
