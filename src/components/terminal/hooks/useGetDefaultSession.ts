@@ -21,10 +21,10 @@ export const useGetDefaultSession = (): SessionState => {
     },
     {
       name: "about",
-      currentDirectory: "/home",
+      currentDirectory: "/",
       history: [convertToHistory(aboutMe(), "about")],
     },
-    { name: "sh", currentDirectory: "/Users/brett.holman", history: [] },
+    { name: "sh", currentDirectory: "/", history: [] },
   ];
 
   return new SessionState(defaultTabs);

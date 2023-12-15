@@ -36,8 +36,6 @@ export const Propmt = ({
 }: PromptProps) => {
   const classes = useStyles();
 
-  console.log({ currentDirectory });
-
   return (
     <>
       {!historicValue && <PromptInput commandMode={commandMode} />}

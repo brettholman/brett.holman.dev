@@ -22,14 +22,12 @@ export const useTmuxControls = (
             newSessionState.activeTabIndex + 1 >= newSessionState.tabs.length
               ? 0
               : newSessionState.activeTabIndex + 1;
+          event.preventDefault();
           break;
         case "c":
           newSessionState.tabs.push(defaultTab());
+          event.preventDefault();
           break;
-        case ",":
-          // TODO rename tab mode
-          break;
-        // TODO handle pane splitting
         default:
           console.log("catch all");
       }
@@ -38,6 +36,9 @@ export const useTmuxControls = (
     } else {
       if (event.ctrlKey && event.key === "a") {
         setCommandMode(true);
+      }
+      if (event.ctrlKey && event.key === "c") {
+        // handle canceling the current command
       }
     }
   };

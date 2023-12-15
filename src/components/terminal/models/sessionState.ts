@@ -11,7 +11,7 @@ interface ISessionState {
 }
 
 export class SessionState implements ISessionState {
-  activeTabIndex: number = 0;
+  activeTabIndex = 0;
   tabs: Array<Tab> = [];
 
   constructor(tabs: Array<Tab>) {
