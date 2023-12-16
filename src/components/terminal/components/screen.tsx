@@ -1,7 +1,6 @@
 import { CssBaseline } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import { Propmt, PromptHistory } from "./prompt";
-import { ResponseBuffer } from "./responseBuffer";
 import { Footer } from "./footer";
 import { useCommandProcessing } from "../hooks/useCommandProcessing";
 import { useEffect, useState } from "react";
@@ -81,7 +80,6 @@ export const Screen = ({
               />
             </form>
           </FormProvider>
-          <ResponseBuffer />
         </div>
         <Footer
           sessionState={sessionState}

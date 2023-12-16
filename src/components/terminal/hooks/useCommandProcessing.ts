@@ -50,7 +50,7 @@ export const useCommandProcessing = ({
         currentDirectory
       );
 
-      sessionState.tabs[sessionState.activeTabIndex].history.push(newHistory);
+      sessionState.getActiveTab().history.push(newHistory);
     }
 
     setValue("hiddenInput", "");
