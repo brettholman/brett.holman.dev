@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import { App } from "../components";
+import { Terminal } from "../components/terminal";
 
 export const Router = () =>
   createBrowserRouter([
     {
       path: "/",
-      element: <App />
+      element: <Terminal />
     },
   ]);
