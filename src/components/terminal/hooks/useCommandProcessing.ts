@@ -17,11 +17,12 @@ export const useCommandProcessing = ({
   updateSessionState,
 }: UseFormReturn<TerminalForm> & Props) => {
   const clearCommandHistory = () => {
-    sessionState.tabs[sessionState.activeTabIndex].history = [];
+    sessionState.getActiveTab().history = [];
     updateSessionState(sessionState);
   };
 
   const { handleCommand } = useCommandHandler({
+    currentDirectory: sessionState.getActiveTab().currentDirectory,
     setCommandHistory: clearCommandHistory,
   });
 

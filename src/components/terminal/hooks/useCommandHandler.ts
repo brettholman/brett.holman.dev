@@ -4,33 +4,34 @@ import { SupportedCommands } from "../models/supportedCommands";
 import { useLoadCommands } from "./commands/useLoadCommands";
 
 interface UseCommandHandlerProps {
+  currentDirectory: string;
   setCommandHistory: () => void; // TODO better
 }
 
 export const useCommandHandler = ({
+  currentDirectory,
   setCommandHistory,
 }: UseCommandHandlerProps) => {
-  const commands = useLoadCommands({ setCommandHistory });
+  const { pwd, help, aboutMe, clear } = useLoadCommands({ setCommandHistory, currentDirectory });
 
   const handleCommand = async (
     command: SupportedCommands | string,
-    args?: string[],
-    currentDirectory?: string
+    args: string[],
   ): Promise<CommandResponse | null> => {
     let response = {} as CommandResponse;
-    console.log("handleCommand", { command, args, currentDirectory });
+    console.log("handleCommand", { command, args });
     switch (command.toLowerCase()) {
       case SupportedCommands.PWD:
-        response = commands.pwd(currentDirectory || "");
+        response = pwd();
         break;
       case SupportedCommands.HELP:
-        response = commands.help();
+        response = help();
         break;
       case SupportedCommands.ABOUT:
-        response = commands.aboutMe();
+        response = aboutMe();
         break;
       case SupportedCommands.CLEAR_SCREEN:
-        commands.clear();
+        clear();
         return null;
       default:
         response.output = `command not found: ${command}`;

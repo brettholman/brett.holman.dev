@@ -1,6 +1,5 @@
 import { SessionState, Tab } from "../models";
 import { useAboutMe } from "./commands/useAboutMe";
-import { useHelp } from "./commands/useHelp";
 import { useWelcome } from "./commands/useWelcome";
 import { useConvertToHistory } from "./useConvertToHistory";
 

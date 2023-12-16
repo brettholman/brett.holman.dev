@@ -1,10 +1,9 @@
 import { CommandStatusCode } from "../../models/commandStatusCode";
 
-export const usePwd = () => {
-  const pwd = (currentDirectory: string) => {
-    const output = "this is some output";
+export const usePwd = (currentDirectory: string) => {
+  const pwd = () => {
     const statusCode = CommandStatusCode.SUCCESS;
-    return { output, statusCode };
+    return { output: currentDirectory, statusCode };
   };
 
   return { pwd };
