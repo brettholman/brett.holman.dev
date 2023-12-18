@@ -29,7 +29,9 @@ export const useHandleCommandMode = ({ sessionState, getDefaultTab }: UseHandleC
       case "7":
       case "8":
       case "9":
-        newSessionState.activeTabIndex = +event.key - 1
+        const nextTab = +event.key - 1;
+        const newActiveTabIndex = Math.min(nextTab, sessionState.tabs.length - 1);
+        newSessionState.activeTabIndex = newActiveTabIndex;
         break;
       default:
         console.log("catch all");
