@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import { Screen } from "./components/screen";
@@ -28,6 +28,7 @@ export const Terminal = (): JSX.Element => {
   return (
     <FormProvider {...methods}>
       <Box onKeyDown={handleKeyPress}>
+        <CssBaseline />
         <Screen
           focused={true} // todo delete me
           sessionState={sessionState}

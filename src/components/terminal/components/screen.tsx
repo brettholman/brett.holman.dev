@@ -1,4 +1,3 @@
-import { CssBaseline } from "@mui/material";
 import { makeStyles } from "@material-ui/styles";
 import { Propmt, PromptHistory } from "./prompt";
 import { Footer } from "./footer";
@@ -43,7 +42,7 @@ export const Screen = ({
 
   useEffect(() => {
     setActiveTab(sessionState.getActiveTab())
-  }, [sessionState.activeTabIndex])
+  }, [sessionState])
 
   const methods = useFormContext<TerminalForm>();
 
@@ -65,27 +64,24 @@ export const Screen = ({
 
   // TODO move the form to the prompt component?
   return (
-    <>
-      <CssBaseline />
-      <div className={classes.root}>
-        <div className={classes.scrollActive}>
-          <PromptHistory history={history} />
-          <FormProvider {...methods}>
-            <form onSubmit={handleOnSubmit} className="form-entry">
-              <Propmt
-                currentDirectory={sessionState.getActiveTab().currentDirectory}
-                focused={focused}
-                previousCommandSuccessful={previousCommandSuccessful}
-                tab={activeTab}
-              />
-            </form>
-          </FormProvider>
-        </div>
-        <Footer
-          sessionState={sessionState}
-          updateSessionState={updateSessionState}
-        />
+    <div className={classes.root}>
+      <div className={classes.scrollActive}>
+        <PromptHistory history={history} />
+        <FormProvider {...methods}>
+          <form onSubmit={handleOnSubmit} className="form-entry">
+            <Propmt
+              currentDirectory={sessionState.getActiveTab().currentDirectory}
+              focused={focused}
+              previousCommandSuccessful={previousCommandSuccessful}
+              tab={activeTab}
+            />
+          </form>
+        </FormProvider>
       </div>
-    </>
+      <Footer
+        sessionState={sessionState}
+        updateSessionState={updateSessionState}
+      />
+    </div>
   );
 };
