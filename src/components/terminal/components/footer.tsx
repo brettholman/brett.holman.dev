@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/styles";
 import { CenterStatusBar, LeftStatusBar, RightStatusBar } from "./statusBar";
 import { SessionState } from "../models/sessionState";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const useStyles = makeStyles({
   footer: {
@@ -22,10 +23,8 @@ interface FooterProps {
 }
 
 export const Footer = ({ sessionState, updateSessionState }: FooterProps) => {
+  const { isMobile } = useIsMobile();
   const classes = useStyles();
-
-  const width = window.innerWidth;
-  const isMobile = width <= 768;
 
   return (
     <div className={classes.footer}>
