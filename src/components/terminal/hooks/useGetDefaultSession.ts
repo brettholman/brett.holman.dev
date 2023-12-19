@@ -27,7 +27,6 @@ export const useGetDefaultSession = () => {
       history: [convertToHistory(aboutMe(), "about")],
       inputBuffer: ""
     },
-    getDefaultTab(),
   ];
 
   const defaultSessionState = new SessionState(defaultTabs);
