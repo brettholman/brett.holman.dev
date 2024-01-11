@@ -59,7 +59,6 @@ export const useCd = ({ setCurrentDirectory }: UseCdProps) => {
         argDir,
         dirRef,
       );
-      console.log({ updatedAbsolutePath });
       setCurrentDirectory(updatedAbsolutePath);
       return createCommandResponse("", CommandStatusCode.SUCCESS);
     } else {

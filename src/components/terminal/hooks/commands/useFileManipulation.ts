@@ -34,14 +34,6 @@ export const useFileManipulation = () => {
     }
     const foundReference = fileStructure[currentDirectoryKey]?.[0];
 
-    console.log({
-      foundReference,
-      currentDirectoryKey,
-      splitDirectoryKey,
-      absoluteCurrentDirectory,
-      fileStructure,
-    });
-
     return foundReference && "edges" in foundReference
       ? (foundReference as Directory)
       : null;

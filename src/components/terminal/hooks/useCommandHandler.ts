@@ -14,7 +14,7 @@ export const useCommandHandler = ({
   setCurrentDirectory,
   setCommandHistory,
 }: UseCommandHandlerProps) => {
-  const { pwd, help, aboutMe, clear, cd } = useLoadCommands({
+  const { pwd, help, aboutMe, clear, cd, ls } = useLoadCommands({
     currentDirectory,
     setCurrentDirectory,
     setCommandHistory,
@@ -41,6 +41,9 @@ export const useCommandHandler = ({
         return null;
       case SupportedCommands.CD:
         response = cd(currentDirectory, args);
+        break;
+      case SupportedCommands.LS:
+        response = ls(currentDirectory);
         break;
       default:
         response.output = `command not found: ${command}`;

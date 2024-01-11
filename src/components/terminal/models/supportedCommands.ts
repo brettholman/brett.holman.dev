@@ -4,4 +4,5 @@ export enum SupportedCommands {
   HELP = "help",
   ABOUT = "about",
   CD = "cd",
+  LS = "ls",
 }
