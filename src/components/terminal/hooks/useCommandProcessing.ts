@@ -21,8 +21,14 @@ export const useCommandProcessing = ({
     updateSessionState(sessionState);
   };
 
+  const setCurrentDirectory = (newDir: string): void => {
+    sessionState.getActiveTab().currentDirectory = newDir;
+    updateSessionState(sessionState);
+  };
+
   const { handleCommand } = useCommandHandler({
     currentDirectory: sessionState.getActiveTab().currentDirectory,
+    setCurrentDirectory,
     setCommandHistory: clearCommandHistory,
   });
 
@@ -48,7 +54,7 @@ export const useCommandProcessing = ({
       const newHistory: PromptStorage = convertToHistory(
         response,
         rawInput,
-        currentDirectory
+        currentDirectory,
       );
 
       sessionState.getActiveTab().history.push(newHistory);

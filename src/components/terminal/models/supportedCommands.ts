@@ -3,4 +3,5 @@ export enum SupportedCommands {
   CLEAR_SCREEN = "clear",
   HELP = "help",
   ABOUT = "about",
+  CD = "cd",
 }

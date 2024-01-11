@@ -1,0 +1,16 @@
+{
+  "/": [
+    {
+      "parent": "",
+      "edges": ["bin", "Users"]
+    }
+  ],
+  "/bin": [{ "parent": "/", "edges": [] }],
+  "/Users": [
+    {
+      "parent": "/",
+      "edges": ["brett.holman"]
+    }
+  ],
+  "/brett.holman": [{ "parent": "/Users", "edges": [] }]
+}

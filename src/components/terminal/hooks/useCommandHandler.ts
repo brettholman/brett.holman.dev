@@ -5,14 +5,20 @@ import { useLoadCommands } from "./commands/useLoadCommands";
 
 interface UseCommandHandlerProps {
   currentDirectory: string;
+  setCurrentDirectory: (newDir: string) => void;
   setCommandHistory: () => void; // TODO better
 }
 
 export const useCommandHandler = ({
   currentDirectory,
+  setCurrentDirectory,
   setCommandHistory,
 }: UseCommandHandlerProps) => {
-  const { pwd, help, aboutMe, clear } = useLoadCommands({ setCommandHistory, currentDirectory });
+  const { pwd, help, aboutMe, clear, cd } = useLoadCommands({
+    currentDirectory,
+    setCurrentDirectory,
+    setCommandHistory,
+  });
 
   const handleCommand = async (
     command: SupportedCommands | string,
@@ -33,6 +39,9 @@ export const useCommandHandler = ({
       case SupportedCommands.CLEAR_SCREEN:
         clear();
         return null;
+      case SupportedCommands.CD:
+        response = cd(currentDirectory, args);
+        break;
       default:
         response.output = `command not found: ${command}`;
         response.statusCode = CommandStatusCode.FAILURE;

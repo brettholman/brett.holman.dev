@@ -7,6 +7,7 @@ Currently the list of supported commands are as follows:
   - about
   - pwd
   - clear
+  - cd
 Give any of the commands a shot! You can start typing at any point (or navigate below to choose a different tab)`;
 
 export const useHelp = () => {
