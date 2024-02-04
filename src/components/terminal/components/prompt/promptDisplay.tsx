@@ -15,6 +15,10 @@ const useStyles = makeStyles({
     position: "relative",
     justifyContent: "center",
   },
+  input: {
+    color: "#bcbcbc",
+    display: "contents",
+  },
   caret: {
     paddingTop: ".2em",
     paddingLeft: ".05em",
@@ -30,11 +34,8 @@ export const PromptDisplay = ({
   const formMethods = useFormContext();
   const value = historicValue || formMethods?.watch("hiddenInput");
   return (
-    <Box component="span" className={classes.container}>
-      <Box>
-        {/* Pre will honor spaces at the end of input, span will not */}
-        <span style={{ color: "#bcbcbc" }}>{value}</span>
-      </Box>
+    <div className={classes.container}>
+      <pre className={classes.input}>{value}</pre>
       {!historicValue && (
         <Box component="span" className={classes.caret}>
           <svg>
@@ -50,6 +51,6 @@ export const PromptDisplay = ({
           </svg>
         </Box>
       )}
-    </Box>
+    </div>
   );
 };
