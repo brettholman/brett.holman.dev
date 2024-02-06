@@ -4,7 +4,6 @@ import { InputContext } from "./input/inputContext";
 
 type PromptProps = {
   currentDirectory: string;
-  focused: boolean;
   previousCommandSuccessful: boolean;
   tab: Tab;
 };
@@ -12,12 +11,14 @@ type PromptProps = {
 export const Propmt = ({
   currentDirectory,
   previousCommandSuccessful,
-  focused,
   tab,
 }: PromptProps) => {
   return (
     <>
-      <InputContext currentDirectory={currentDirectory} previousCommandSuccessful={previousCommandSuccessful} focused={focused} />
+      <InputContext
+        currentDirectory={currentDirectory}
+        previousCommandSuccessful={previousCommandSuccessful}
+      />
       <PromptInput tab={tab} />
     </>
   );

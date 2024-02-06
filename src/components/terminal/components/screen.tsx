@@ -8,7 +8,6 @@ import { SessionState, Tab } from "../models";
 import { TerminalForm } from "../hooks/useTerminalForm";
 
 interface ScreenProps {
-  focused: boolean;
   sessionState: SessionState;
   updateSessionState: (_: Partial<SessionState>) => void;
 }
@@ -18,21 +17,17 @@ const useStyles = makeStyles({
     backgroundColor: "#292929",
     minWidth: "100%",
     height: "100vh",
-    padding: 0
+    padding: 0,
   },
   scrollActive: {
     overflowY: "scroll",
     overflowX: "hidden",
     width: "100vw",
-    height: "95vh"
-  }
+    height: "95vh",
+  },
 });
 
-export const Screen = ({
-  focused,
-  sessionState,
-  updateSessionState,
-}: ScreenProps) => {
+export const Screen = ({ sessionState, updateSessionState }: ScreenProps) => {
   const classes = useStyles();
 
   const [previousCommandSuccessful, setPreviousCommandSuccessful] =
@@ -41,8 +36,8 @@ export const Screen = ({
   const [activeTab, setActiveTab] = useState<Tab>(sessionState.getActiveTab());
 
   useEffect(() => {
-    setActiveTab(sessionState.getActiveTab())
-  }, [sessionState])
+    setActiveTab(sessionState.getActiveTab());
+  }, [sessionState]);
 
   const methods = useFormContext<TerminalForm>();
 
@@ -55,11 +50,11 @@ export const Screen = ({
   const handleOnSubmit = async (event: any) => {
     event.preventDefault();
     const previousCommand = await processCommand(
-      sessionState.getActiveTab().currentDirectory
+      sessionState.getActiveTab().currentDirectory,
     );
     setPreviousCommandSuccessful(previousCommand);
-    const bottomEl = document.getElementsByClassName('form-entry');
-    bottomEl[0].scrollIntoView({ block: 'end' });
+    const bottomEl = document.getElementsByClassName("form-entry");
+    bottomEl[0].scrollIntoView({ block: "end" });
   };
 
   // TODO move the form to the prompt component?
@@ -71,7 +66,6 @@ export const Screen = ({
           <form onSubmit={handleOnSubmit} className="form-entry">
             <Propmt
               currentDirectory={sessionState.getActiveTab().currentDirectory}
-              focused={focused}
               previousCommandSuccessful={previousCommandSuccessful}
               tab={activeTab}
             />

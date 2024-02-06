@@ -5,7 +5,6 @@ import { PromptDisplay } from "../promptDisplay";
 type PromptProps = {
   currentDirectory: string;
   previousCommandSuccessful: boolean;
-  focused: boolean;
   historicValue?: string;
 };
 
@@ -23,7 +22,6 @@ const useStyles = makeStyles({
 export const InputContext = ({
   currentDirectory,
   previousCommandSuccessful,
-  focused,
   historicValue,
 }: PromptProps) => {
   const classes = useStyles();
@@ -43,7 +41,7 @@ export const InputContext = ({
       >
         $
       </Typography>
-      <PromptDisplay focused={focused} historicValue={historicValue} />
+      <PromptDisplay historicValue={historicValue} />
     </Box>
   );
 };

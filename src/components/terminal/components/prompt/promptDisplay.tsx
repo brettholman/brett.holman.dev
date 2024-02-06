@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 
 interface PromptDisplayProps {
-  focused: boolean;
   historicValue?: string;
 }
 
@@ -25,10 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const PromptDisplay = ({
-  focused,
-  historicValue,
-}: PromptDisplayProps) => {
+export const PromptDisplay = ({ historicValue }: PromptDisplayProps) => {
   const classes = useStyles();
 
   const formMethods = useFormContext();
@@ -43,7 +39,7 @@ export const PromptDisplay = ({
               width=".5em"
               height="1em"
               style={{
-                fill: focused ? "rgb(187,187,187)" : "transparent",
+                fill: "rgb(187,187,187)",
                 stroke: "rgb(187,187,187)",
                 strokeWidth: 3,
               }}

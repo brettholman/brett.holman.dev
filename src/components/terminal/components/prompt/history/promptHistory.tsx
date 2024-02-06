@@ -12,7 +12,11 @@ export const PromptHistory = ({ history }: PromptHistoryProps): JSX.Element => (
   <Box>
     {history.map((value: PromptStorage, index: number) => (
       <React.Fragment key={index}>
-        <InputContext focused={false} historicValue={value.input} previousCommandSuccessful={value.previousCommandSuccessful} currentDirectory={value.currentDirectory} />
+        <InputContext
+          historicValue={value.input}
+          previousCommandSuccessful={value.previousCommandSuccessful}
+          currentDirectory={value.currentDirectory}
+        />
         <ResponseBuffer value={value.output} />
       </React.Fragment>
     ))}

@@ -30,7 +30,6 @@ export const Terminal = (): JSX.Element => {
       <Box onKeyDown={handleKeyPress}>
         <CssBaseline />
         <Screen
-          focused={true} // todo delete me
           sessionState={sessionState}
           updateSessionState={updateSessionState}
         />
