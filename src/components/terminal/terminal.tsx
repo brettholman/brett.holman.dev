@@ -25,9 +25,13 @@ export const Terminal = (): JSX.Element => {
 
   const { methods } = useTerminalForm();
 
+  const focus = () => {
+    methods.setFocus("hiddenInput");
+  };
+
   return (
     <FormProvider {...methods}>
-      <Box onKeyDown={handleKeyPress}>
+      <Box onKeyDown={handleKeyPress} onClick={focus}>
         <CssBaseline />
         <Screen
           sessionState={sessionState}

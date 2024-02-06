@@ -9,9 +9,9 @@ interface PromptInputProps {
 }
 
 export const PromptInput = ({ tab }: PromptInputProps) => {
-  const { control, watch } = useFormContext();
+  const { register, watch } = useFormContext();
 
-  const currentValue = watch("hiddenInput");
+  const currentValue = watch("hiddenInput") || "";
 
   useEffect(() => {
     if (tab) {
@@ -21,14 +21,7 @@ export const PromptInput = ({ tab }: PromptInputProps) => {
 
   return (
     <Box style={{ height: "0px", width: "0px" }}>
-      <Controller
-        name="hiddenInput"
-        defaultValue={tab?.inputBuffer}
-        control={control}
-        render={({ field }) => (
-          <Input autoFocus {...field} value={currentValue} />
-        )}
-      />
+      <Input autoFocus {...register("hiddenInput")} value={currentValue} />
     </Box>
   );
 };
