@@ -3,12 +3,12 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { Theme } from "./theme/theme";
-import { ThemeProvider } from "@emotion/react";
 import { Router } from "./router/router";
+import { ThemeProvider } from "@mui/material";
 
 // it could be your App.tsx file or theme file that is included in your tsconfig.json
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 const theme = Theme();
@@ -20,7 +20,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
