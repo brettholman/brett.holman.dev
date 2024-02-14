@@ -9,23 +9,24 @@ export const useGetDefaultSession = () => {
   const { convertToHistory } = useConvertToHistory();
 
   const getDefaultTab = (): Tab => ({
-    name: "sh", currentDirectory: "/", history: [], inputBuffer: ""
+    name: "sh",
+    currentDirectory: "/",
+    history: [],
+    inputBuffer: "",
   });
 
   const defaultTabs: Array<Tab> = [
     {
       name: "welcome",
       currentDirectory: "/",
-      history: [
-        convertToHistory(welcome(), "welcome"),
-      ],
-      inputBuffer: ""
+      history: [convertToHistory(welcome(), "welcome")],
+      inputBuffer: "",
     },
     {
       name: "about",
       currentDirectory: "/",
       history: [convertToHistory(aboutMe(), "about")],
-      inputBuffer: ""
+      inputBuffer: "",
     },
   ];
 

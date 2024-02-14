@@ -36,6 +36,7 @@ export const Screen = ({ sessionState, updateSessionState }: ScreenProps) => {
   const [activeTab, setActiveTab] = useState<Tab>(sessionState.getActiveTab());
 
   useEffect(() => {
+    console.log({ inputBuffer: activeTab.inputBuffer });
     setActiveTab(sessionState.getActiveTab());
   }, [sessionState]);
 

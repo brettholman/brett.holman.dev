@@ -13,6 +13,11 @@ export const Terminal = (): JSX.Element => {
   const [sessionState, setSessionState] =
     useState<SessionState>(defaultSessionState);
 
+  const { methods } = useTerminalForm();
+  const focus = () => {
+    methods.setFocus("hiddenInput");
+  };
+
   const updateSessionState = (newState: Partial<SessionState>) => {
     setSessionState({ ...sessionState, ...newState });
   };
@@ -22,12 +27,6 @@ export const Terminal = (): JSX.Element => {
     updateSessionState,
     getDefaultTab,
   );
-
-  const { methods } = useTerminalForm();
-
-  const focus = () => {
-    methods.setFocus("hiddenInput");
-  };
 
   return (
     <FormProvider {...methods}>
