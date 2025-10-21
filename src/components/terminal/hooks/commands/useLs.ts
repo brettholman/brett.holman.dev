@@ -24,5 +24,23 @@ export const useLs = () => {
     };
   };
 
-  return { ls };
+  const l = (directory: string): CommandResponse => {
+    if (!directory) {
+      return { output: "", statusCode: CommandStatusCode.FAILURE };
+    }
+
+    const dirRef = findCurrentLocation(directory);
+    if (!dirRef) {
+      return {
+        output: `${directory}: No such file or directory`,
+        statusCode: CommandStatusCode.FAILURE,
+      };
+    }
+    return {
+      output: formatOutput(dirRef.edges),
+      statusCode: CommandStatusCode.SUCCESS,
+    };
+  };
+
+  return { ls, l };
 };

@@ -6,9 +6,13 @@ export const useTmuxControls = (
   sessionState: SessionState,
   updateSessionState: (sessionState: Partial<SessionState>) => void,
   getDefaultTab: () => Tab,
+  clearScreen: () => void,
 ) => {
   const [commandMode, setCommandMode] = useState(false);
-  const { handleCommandMode } = useHandleCommandMode({ sessionState, getDefaultTab });
+  const { handleCommandMode } = useHandleCommandMode({
+    sessionState,
+    getDefaultTab,
+  });
 
   const handleKeyPress = (event: any) => {
     if (commandMode) {

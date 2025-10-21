@@ -2,7 +2,7 @@ import { CommandResponse } from "../../models/commandResponse";
 import { useFileManipulation } from "./useFileManipulation";
 import { CommandStatusCode } from "../../models/commandStatusCode";
 
-const helpMessage = `This message will attempt to explain how to use \`cd\` (on this site).
+export const manMessage = `This message will attempt to explain how to use \`cd\` (on this site).
 
 \`cd\` allows you to traverse the playground file structure, mimicking what you might find in a Linux file system.
 
@@ -45,9 +45,6 @@ export const useCd = ({ setCurrentDirectory }: UseCdProps) => {
     }
 
     const argDir = newDirectory[0];
-    if (argDir === "help") {
-      return createCommandResponse(helpMessage, CommandStatusCode.SUCCESS);
-    }
     const dirRef = findCurrentLocation(currentDirectory);
     if (!dirRef) {
       setCurrentDirectory("/");

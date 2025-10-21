@@ -5,4 +5,7 @@ export enum SupportedCommands {
   ABOUT = "about",
   CD = "cd",
   LS = "ls",
+  L = "l",
+  MAN = "man",
+  CAT = "cat",
 }

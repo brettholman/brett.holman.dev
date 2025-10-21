@@ -1,10 +1,14 @@
+import { useEffect, useMemo, useState } from "react";
 import fileJson from "../../static/fileStructure.json";
+import {
+  RepositoryName,
+  useLoadGithubFiles,
+} from "./helpers/useLoadGithubFiles";
+import { GithubFile } from "../../models/githubFile";
 
 interface GraphNode {
   parent: string;
 }
-
-export interface File {}
 
 export interface Directory extends GraphNode {
   edges: Array<string>;
@@ -14,7 +18,22 @@ const PARENT_DIR = "..";
 const ROOT_DIR = "/";
 
 export const useFileManipulation = () => {
-  const fileStructure: Record<string, Array<File | Directory>> = fileJson;
+  const { repos, loading } = useLoadGithubFiles();
+
+  const [fileStructure, setFileStructure] =
+    useState<Record<string, Array<GithubFile | Directory>>>(fileJson);
+
+  const loadGithubRepos = () => {
+    Object.entries(repos).map(([repoName, githubRepo]) => {
+      console.log(`loading ${repoName}`);
+      fileStructure[repoName] = githubRepo.tree;
+    });
+  };
+
+  useEffect(() => {
+    if (Object.keys(repos).length == Object.keys(RepositoryName).length)
+      loadGithubRepos();
+  }, [loading]);
 
   const findCurrentLocation = (
     absoluteCurrentDirectory: String,

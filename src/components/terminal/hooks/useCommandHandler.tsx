@@ -1,3 +1,4 @@
+import React from "react";
 import { CommandResponse } from "../models/commandResponse";
 import { CommandStatusCode } from "../models/commandStatusCode";
 import { SupportedCommands } from "../models/supportedCommands";
@@ -14,7 +15,7 @@ export const useCommandHandler = ({
   setCurrentDirectory,
   setCommandHistory,
 }: UseCommandHandlerProps) => {
-  const { pwd, help, aboutMe, clear, cd, ls } = useLoadCommands({
+  const { pwd, help, aboutMe, clear, cd, ls, l, man, cat } = useLoadCommands({
     currentDirectory,
     setCurrentDirectory,
     setCommandHistory,
@@ -45,9 +46,20 @@ export const useCommandHandler = ({
       case SupportedCommands.LS:
         response = ls(currentDirectory);
         break;
+      case SupportedCommands.L:
+        response = l(currentDirectory);
+        break;
+      case SupportedCommands.MAN:
+        response = man(args);
+        break;
+      case SupportedCommands.CAT:
+        response = cat(args);
+        break;
       default:
-        response.output = `command not found: ${command}`;
-        response.statusCode = CommandStatusCode.FAILURE;
+        response = {
+          output: <span>command not found {command}</span>,
+          statusCode: CommandStatusCode.FAILURE,
+        };
         break;
     }
     return response;

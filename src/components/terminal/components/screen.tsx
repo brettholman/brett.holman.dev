@@ -1,3 +1,4 @@
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Propmt, PromptHistory } from "./prompt";
 import { Footer } from "./footer";

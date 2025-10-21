@@ -7,6 +7,9 @@ export const Theme = () =>
       body1: {},
     },
     palette: {
+      text: {
+        primary: "#ffffff",
+      },
       primary: {
         main: "#bcbcbc",
       },

@@ -6,7 +6,7 @@ export const useConvertToHistory = () => {
   const convertToHistory = (
     response: CommandResponse,
     input: string,
-    currentDirectory = "/"
+    currentDirectory = "/",
   ): PromptStorage => ({
     input,
     currentDirectory,

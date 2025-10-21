@@ -4,6 +4,8 @@ import { useHelp } from "./useHelp";
 import { useAboutMe } from "./useAboutMe";
 import { useCd } from "./useCd";
 import { useLs } from "./useLs";
+import { useMan } from "./useMan";
+import { useCat } from "./useCat";
 
 interface UseLoadCommandsProps {
   currentDirectory: string;
@@ -22,4 +24,6 @@ export const useLoadCommands = ({
   ...useAboutMe(),
   ...useCd({ setCurrentDirectory }),
   ...useLs(),
+  ...useMan(),
+  ...useCat(),
 });
