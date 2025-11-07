@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Propmt, PromptHistory } from "./prompt";
+import { AutocompleteSuggestions } from "./prompt/autocompleteSuggestions";
 import { Footer } from "./footer";
 import { useCommandProcessing } from "../hooks/useCommandProcessing";
 import { useEffect, useState } from "react";
@@ -35,10 +36,13 @@ export const Screen = ({ sessionState, updateSessionState }: ScreenProps) => {
     useState(true);
 
   const [activeTab, setActiveTab] = useState<Tab>(sessionState.getActiveTab());
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
-    console.log({ inputBuffer: activeTab.inputBuffer });
-    setActiveTab(sessionState.getActiveTab());
+    const nextActiveTab = sessionState.getActiveTab();
+    console.log({ inputBuffer: nextActiveTab.inputBuffer });
+    setActiveTab(nextActiveTab);
+    setSuggestions([]);
   }, [sessionState]);
 
   const methods = useFormContext<TerminalForm>();
@@ -55,6 +59,7 @@ export const Screen = ({ sessionState, updateSessionState }: ScreenProps) => {
       sessionState.getActiveTab().currentDirectory,
     );
     setPreviousCommandSuccessful(previousCommand);
+    setSuggestions([]);
     const bottomEl = document.getElementsByClassName("form-entry");
     bottomEl[0].scrollIntoView({ block: "end" });
   };
@@ -70,7 +75,9 @@ export const Screen = ({ sessionState, updateSessionState }: ScreenProps) => {
               currentDirectory={sessionState.getActiveTab().currentDirectory}
               previousCommandSuccessful={previousCommandSuccessful}
               tab={activeTab}
+              onSuggestions={setSuggestions}
             />
+            <AutocompleteSuggestions suggestions={suggestions} />
           </form>
         </FormProvider>
       </div>

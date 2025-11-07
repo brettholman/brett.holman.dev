@@ -6,12 +6,14 @@ type PromptProps = {
   currentDirectory: string;
   previousCommandSuccessful: boolean;
   tab: Tab;
+  onSuggestions: (suggestions: string[]) => void;
 };
 
 export const Propmt = ({
   currentDirectory,
   previousCommandSuccessful,
   tab,
+  onSuggestions,
 }: PromptProps) => {
   return (
     <>
@@ -19,7 +21,7 @@ export const Propmt = ({
         currentDirectory={currentDirectory}
         previousCommandSuccessful={previousCommandSuccessful}
       />
-      <PromptInput tab={tab} />
+      <PromptInput tab={tab} onSuggestions={onSuggestions} />
     </>
   );
 };
