@@ -1,16 +1,16 @@
 {
-  "/": [
-    {
-      "parent": "",
-      "edges": ["bin", "Users"]
-    }
-  ],
-  "/bin": [{ "parent": "/", "edges": [] }],
-  "/Users": [
-    {
-      "parent": "/",
-      "edges": ["brett.holman"]
-    }
-  ],
-  "/brett.holman": [{ "parent": "/Users", "edges": [] }]
+  "/": {
+    "parent": "",
+    "edges": ["bin", "Users", "repos"]
+  },
+  "/bin": { "parent": "/", "edges": [] },
+  "/Users": {
+    "parent": "/",
+    "edges": ["brett.holman"]
+  },
+  "/brett.holman": { "parent": "/Users", "edges": [] },
+  "/repos": {
+    "parent": "/",
+    "edges": []
+  }
 }

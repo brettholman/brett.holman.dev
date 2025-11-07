@@ -53,7 +53,7 @@ export const useCommandHandler = ({
         response = man(args);
         break;
       case SupportedCommands.CAT:
-        response = cat(args);
+        response = await cat(currentDirectory, args);
         break;
       default:
         response = {

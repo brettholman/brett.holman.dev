@@ -2,10 +2,11 @@ import { CommandResponse } from "../../models/commandResponse";
 import { CommandStatusCode } from "../../models/commandStatusCode";
 import { useFileManipulation } from "./useFileManipulation";
 
-const formatOutput = (edges: string[]) => edges.join("\t");
+const formatOutput = (directories: string[], files: string[]) =>
+  [...directories, ...files].join("\t");
 
 export const useLs = () => {
-  const { findCurrentLocation } = useFileManipulation();
+  const { findCurrentLocation, getFilesInDirectory } = useFileManipulation();
   const ls = (directory: string): CommandResponse => {
     if (!directory) {
       return { output: "", statusCode: CommandStatusCode.FAILURE };
@@ -19,7 +20,7 @@ export const useLs = () => {
       };
     }
     return {
-      output: formatOutput(dirRef.edges),
+      output: formatOutput(dirRef.edges, getFilesInDirectory(directory)),
       statusCode: CommandStatusCode.SUCCESS,
     };
   };
@@ -37,7 +38,7 @@ export const useLs = () => {
       };
     }
     return {
-      output: formatOutput(dirRef.edges),
+      output: formatOutput(dirRef.edges, getFilesInDirectory(directory)),
       statusCode: CommandStatusCode.SUCCESS,
     };
   };
